@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         txtSTb.requestFocus();
     }
 
-    private void btnSimpanClick(View view) {
+    public void btnSimpanClick (View view) {
         mhs = new Mahasiswa(
                 txtSTb.getText().toString(),
                 txtNama.getText().toString(),
@@ -66,5 +67,22 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         clearData();
+    }
+
+    public void btnTampilDataClick(View view) {
+        intentEdit = null;
+        Intent intent = new Intent(this, TampilDataActivity.class);
+        startActivityForResult (intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            intentEdit = data;
+            txtSTb.setText(data.getStringExtra("stb"));
+            txtNama.setText(data.getStringExtra("nama"));
+            txtAngkatan.setText(data.getStringExtra("angkatan"));
+        }
     }
 }
