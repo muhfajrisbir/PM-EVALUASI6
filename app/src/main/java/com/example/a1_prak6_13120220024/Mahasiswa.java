@@ -31,7 +31,7 @@ public class Mahasiswa {
     }
 
     public JSONObject toJSON() throws JSONException{
-        JSONObject = new JSONObject();
+        jsonObject = new JSONObject();
         jsonObject.put("stb", stb);
         jsonObject.put("nama", nama);
         jsonObject.put("angkatan", angkatan);
